@@ -7,24 +7,23 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 
-namespace PriscilaZunigaApuntesMaui.ViewModels
+namespace PriscilaZunigaApuntesMaui.ViewModels;
+
+internal class PZAboutViewModel
 {
-    internal class PZAboutViewModel
+    public string PZTitle => AppInfo.Name;
+    public string PZVersion => AppInfo.VersionString;
+    public string PZMoreInfoUrl => "https://aka.ms/maui";
+    public string PZMessage => "This app is written in XAML and C# with .NET MAUI by Priscila Zuniga";
+    public ICommand PZShowMoreInfoCommand { get; }
+
+    public PZAboutViewModel()
     {
-        public string PZTitle => AppInfo.Name;
-        public string PZVersion => AppInfo.VersionString;
-        public string PZMoreInfoUrl => "https://aka.ms/maui";
-        public string PZMessage => "This app is written in XAML and C# with .NET MAUI by Priscila Zuniga";
-        public ICommand PZShowMoreInfoCommand { get; }
-
-        public PZAboutViewModel()
-        {
-            PZShowMoreInfoCommand = new AsyncRelayCommand(ShowMoreInfo);
-        }
-
-        async Task ShowMoreInfo() =>
-            await Launcher.Default.OpenAsync(PZMoreInfoUrl);
-
-
+        PZShowMoreInfoCommand = new AsyncRelayCommand(ShowMoreInfo);
     }
+
+    async Task ShowMoreInfo() =>
+        await Launcher.Default.OpenAsync(PZMoreInfoUrl);
+
+
 }

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:PriscilaZunigaApuntesMaui.ViewModels"
              x:Class="PriscilaZunigaApuntesMaui.Views.PZAboutPage"
-             Title="PZAboutPage">
+             >
     <ContentPage.BindingContext>
         <viewModels:PZAboutViewModel />
         
@@ -14,11 +14,11 @@
             <Image Source="dotnet_bot.png"
                    SemanticProperties.Description="The dot net bot waving hello!"
                    HeightRequest="64" />
-            <Label FontSize="22" FontAttributes="Bold" Text="{Binding Title}" VerticalOptions="End" />
-            <Label FontSize="22" Text="{Binding Version}" VerticalOptions="End" />
+            <Label FontSize="22" FontAttributes="Bold" Text="{Binding PZTitle}" VerticalOptions="End" />
+            <Label FontSize="22" Text="{Binding PZVersion}" VerticalOptions="End" />
         </HorizontalStackLayout>
 
-        <Label Text="{Binding Message}" />
+        <Label Text="{Binding PZMessage}" />
        
         <Button Text="Learn more..." Command="{Binding PZShowMoreInfoCommand}" />
     </VerticalStackLayout>

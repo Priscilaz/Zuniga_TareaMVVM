@@ -21,13 +21,13 @@ namespace PriscilaZunigaApuntesMaui.Models
         }
 
 
-        public void SavePZ() =>
+        public void PZSave() =>
             File.WriteAllText(System.IO.Path.Combine(FileSystem.AppDataDirectory, Filename), Text);
 
-        public void DeletePZ() =>
+        public void PZDelete() =>
             File.Delete(System.IO.Path.Combine(FileSystem.AppDataDirectory, Filename));
 
-        public static PZNote LoadPZ(string filename)
+        public static PZNote PZLoad(string filename)
         {
             filename = System.IO.Path.Combine(FileSystem.AppDataDirectory, filename);
 
@@ -43,7 +43,7 @@ namespace PriscilaZunigaApuntesMaui.Models
                 };
         }
 
-        public static IEnumerable<PZNote> LoadAllPZ()
+        public static IEnumerable<PZNote> PZLoadAll()
         {
             // Get the folder where the notes are stored.
             string appDataPath = FileSystem.AppDataDirectory;
@@ -55,7 +55,7 @@ namespace PriscilaZunigaApuntesMaui.Models
                     .EnumerateFiles(appDataPath, "*.notes.txt")
 
                     // Each file name is used to load a note
-                    .Select(filename => PZNote.LoadPZ(Path.GetFileName(filename)))
+                    .Select(filename => PZNote.PZLoad(Path.GetFileName(filename)))
 
                     // With the final collection of notes, order them by date
                     .OrderByDescending(note => note.Date);

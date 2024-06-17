@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:PriscilaZunigaApuntesMaui.ViewModels"
              x:Class="PriscilaZunigaApuntesMaui.Views.PZAllNotesPage"
-             Title="PZAllNotesPage">
+             Title="PZAllNotesPage"
+             NavigatedTo="ContentPage_NavigatedTo">
     <ContentPage.BindingContext>
         <viewModels:PZNotesViewModel />
     </ContentPage.BindingContext>
@@ -14,7 +15,7 @@
     </ContentPage.ToolbarItems>
 
     <!-- Display notes in a list -->
-    <CollectionView x:Name="notesCollection"
+    <CollectionView x:Name="pznotesCollection"
                         ItemsSource="{Binding PZAllNotes}"
                         Margin="20"
                         SelectionMode="Single"
@@ -30,8 +31,8 @@
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <StackLayout>
-                    <Label Text="{Binding Text}" FontSize="22"/>
-                    <Label Text="{Binding Date}" FontSize="14" TextColor="Silver"/>
+                    <Label Text="{Binding PZText}" FontSize="22" TextColor="Black"/>
+                    <Label Text="{Binding PZDate}" FontSize="14" TextColor="Silver"/>
                 </StackLayout>
             </DataTemplate>
         </CollectionView.ItemTemplate>

@@ -13,7 +13,7 @@ namespace PriscilaZunigaApuntesMaui.ViewModels;
 
 internal class PZNoteViewModel : ObservableObject, IQueryAttributable
 {
-    private Models.PZNote? _pznote;
+    private Models.PZNote _pznote;
 
     public string PZText
     {
@@ -32,8 +32,8 @@ internal class PZNoteViewModel : ObservableObject, IQueryAttributable
 
     public string PZIdentifier => _pznote.Filename;
 
-    public ICommand? PZSaveCommand { get; private set; }
-    public ICommand? PZDeleteCommand { get; private set; }
+    public ICommand PZSaveCommand { get; private set; }
+    public ICommand PZDeleteCommand { get; private set; }
 
     public PZNoteViewModel()
     {
@@ -52,13 +52,13 @@ internal class PZNoteViewModel : ObservableObject, IQueryAttributable
     private async Task PZSave()
     {
         _pznote.Date = DateTime.Now;
-        _pznote.SavePZ();
+        _pznote.PZSave();
         await Shell.Current.GoToAsync($"..?saved={_pznote.Filename}");
     }
 
     private async Task PZDelete()
     {
-        _pznote.DeletePZ();
+        _pznote.PZDelete();
         await Shell.Current.GoToAsync($"..?deleted={_pznote.Filename}");
     }
 
@@ -66,19 +66,19 @@ internal class PZNoteViewModel : ObservableObject, IQueryAttributable
     {
         if (query.ContainsKey("load"))
         {
-            _pznote = Models.PZNote.LoadPZ(query["load"].ToString());
+            _pznote = Models.PZNote.PZLoad(query["load"].ToString());
             PZRefreshProperties();
         }
     }
     public void PZReload()
     {
-        _pznote = Models.PZNote.LoadPZ(_pznote.Filename);
+        _pznote = Models.PZNote.PZLoad(_pznote.Filename);
         PZRefreshProperties();
     }
 
     private void PZRefreshProperties()
     {
-        OnPropertyChanged(nameof(Text));
-        OnPropertyChanged(nameof(Date));
+        OnPropertyChanged(nameof(PZText));
+        OnPropertyChanged(nameof(PZDate));
     }
 }
